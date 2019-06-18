@@ -1,4 +1,4 @@
-import { ADD_NEW_TODO, TOGGLE_COMPLETED_TASK } from '../actions/actions'
+import { ADD_NEW_TODO, TOGGLE_COMPLETED_TASK, DELETE_SELECTED_TASK } from '../actions/actions'
 
 const initialState = {
     todolist: [
@@ -18,9 +18,11 @@ const todoReducer = (state = initialState, action) => {
                     newTodo
                 ]
             }
+
         case TOGGLE_COMPLETED_TASK:
             return {
-                todolist: state.todolist.map(todo => {
+                ...state,
+                todolist: state.todolist.filter(todo => {
                     if (action.payload === todo.id) {
                         return {
                           ...todo,
@@ -31,6 +33,15 @@ const todoReducer = (state = initialState, action) => {
                       }
                 })
             }
+        
+        case DELETE_SELECTED_TASK:
+            return {
+                ...state,
+                todolist: state.todolist.filter(todo =>
+                    action.payload !== todo.id
+                )
+            }
+
         default:
             return state;
     }

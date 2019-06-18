@@ -7,6 +7,7 @@ const TodoList = (props) => {
             <h4 onClick={event => props.toggleCompleted(event, todo.id)} key={todo.id}>
               {todo.task}
               {/* {todo.completed} */}
+              <span onClick={event => props.deleteTask(event, todo.id)}>delete task</span>
             </h4>
           ))}
 
