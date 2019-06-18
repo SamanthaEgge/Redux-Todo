@@ -1,17 +1,26 @@
-import { ACTIONS } from '../actions/actions'
+import { ADD_NEW_TODO } from '../actions/actions'
 
 const initialState = {
-    todo: []
+    todolist: [
+        {task: 'HERE I AMMMM DOO DOO', completed: false },
+        {task: 'task task task task task', completed: true }
+    ]
 }
 
-export default (state = initialState, action) => {
+const todoReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ACTION:
+        case ADD_NEW_TODO:
+            const newTodo = { name: action.payload, completed: false }
             return {
                 ...state,
-                todo: action.payload
+                todolist: [
+                    ...state.todolist,
+                    newTodo
+                ]
             }
         default:
             return state;
     }
 }
+
+export default todoReducer;

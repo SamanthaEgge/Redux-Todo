@@ -1,27 +1,41 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import TodoList from './components/TodoList'
+import { addNewTodo } from './actions/actions.js'
 
 class App extends Component {
   state = {
-    todo: []
+    newTodo: ''
+  }
+
+  handleChanges = event => {
+    this.setState({ newTodo: event.target.value })
+  }
+
+  addTodo = event => {
+    event.preventDefault();
+    this.props.addNewTodo(this.state.newTodo)
+    this.setState({ newTodo: '' })
   }
 
   render () {
     return (
       <div className="App">
         <h2>Todo List: </h2>
-        <TodoList />
-        <TodoForm />
+        <TodoList 
+          addTodo={this.addTodo}
+          handleChanges={this.handleChanges}
+          todolist={this.props.todolist} />
       </div>
     )
   };
 }
 
-const mapStateToProps = (todo) => {
+const mapStateToProps = (state) => {
   return {
-    todo: state.todo
+    todolist: state.todolist
   }
 }
 
-export default connect(mapStateToProps, { action })(App);
+export default connect(mapStateToProps, { addNewTodo })(App);
