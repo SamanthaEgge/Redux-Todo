@@ -1,11 +1,10 @@
 import React from 'react';
 
 const TodoList = (props) => {
-    console.log(props)
     return(
         <div className='todo-list'>
           {props.todolist.map(todo => (
-            <h4 key={todo.id}>
+            <h4 onClick={event => props.toggleCompleted(event, todo.id)} key={todo.id}>
               {todo.task}
               {/* {todo.completed} */}
             </h4>
@@ -21,7 +20,6 @@ const TodoList = (props) => {
           </form>
         </div>
     )
-
 }
 
 export default TodoList

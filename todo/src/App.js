@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TodoList from './components/TodoList';
-import { addNewTodo } from './actions/actions.js';
+import { addNewTodo, toggleCompletedTask } from './actions/actions.js';
 
 class App extends Component {
   state = {
@@ -20,9 +20,9 @@ class App extends Component {
     // console.log('newTodo',this.props.addNewTodo)
   }
   
-  toggleCompleted = (event, taskID) => {
+  toggleCompleted = (event, todoID) => {
     event.preventDefault();
-    this.props.toggleCompletedTask(taskID)
+    this.props.toggleCompletedTask(todoID)
   }
 
   render () {
@@ -33,7 +33,8 @@ class App extends Component {
           addTodo={this.addTodo}
           handleChanges={this.handleChanges}
           todolist={this.props.todolist} 
-          newTodo={this.state.newTodo}/>
+          newTodo={this.state.newTodo}
+          toggleCompleted = {this.toggleCompleted} />
       </div>
     )
   };
@@ -45,4 +46,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addNewTodo })(App);
+export default connect(mapStateToProps, { addNewTodo, toggleCompletedTask })(App);
