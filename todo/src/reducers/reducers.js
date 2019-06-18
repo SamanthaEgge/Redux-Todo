@@ -1,22 +1,35 @@
-import { ADD_NEW_TODO } from '../actions/actions'
+import { ADD_NEW_TODO, TOGGLE_COMPLETED_TASK } from '../actions/actions'
 
 const initialState = {
     todolist: [
-        {task: 'HERE I AMMMM DOO DOO', completed: false },
-        {task: 'task task task task task', completed: true }
+        {task: 'HERE I AMMMM DOO DOO', completed: false, id: 124 },
+        {task: 'task task task task task', completed: true, id: 666 }
     ]
 }
 
 const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NEW_TODO:
-            const newTodo = { name: action.payload, completed: false }
+            const newTodo = { task: action.payload, completed: false, id: Date.now() }
             return {
                 ...state,
                 todolist: [
                     ...state.todolist,
                     newTodo
                 ]
+            }
+        case TOGGLE_COMPLETED_TASK:
+            return {
+                todolist: state.todolist.map(todo => {
+                    if (action.payload === todo.id) {
+                        return {
+                          ...todo,
+                          completed: !todo.completed
+                        };
+                      } else {
+                        return todo;
+                      }
+                })
             }
         default:
             return state;

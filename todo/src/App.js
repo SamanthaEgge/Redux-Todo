@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TodoList from './components/TodoList'
-import { addNewTodo } from './actions/actions.js'
+import TodoList from './components/TodoList';
+import { addNewTodo } from './actions/actions.js';
 
 class App extends Component {
   state = {
@@ -17,6 +17,12 @@ class App extends Component {
     event.preventDefault();
     this.props.addNewTodo(this.state.newTodo)
     this.setState({ newTodo: '' })
+    // console.log('newTodo',this.props.addNewTodo)
+  }
+  
+  toggleCompleted = (event, taskID) => {
+    event.preventDefault();
+    this.props.toggleCompletedTask(taskID)
   }
 
   render () {
@@ -26,7 +32,8 @@ class App extends Component {
         <TodoList 
           addTodo={this.addTodo}
           handleChanges={this.handleChanges}
-          todolist={this.props.todolist} />
+          todolist={this.props.todolist} 
+          newTodo={this.state.newTodo}/>
       </div>
     )
   };
