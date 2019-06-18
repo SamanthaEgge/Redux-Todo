@@ -4,11 +4,13 @@ const TodoList = (props) => {
     return(
         <div className='todo-list'>
           {props.todolist.map(todo => (
-            <h4 onClick={event => props.toggleCompleted(event, todo.id)} key={todo.id}>
-              {todo.task}
-              {/* {todo.completed} */}
-              <span onClick={event => props.deleteTask(event, todo.id)}>delete task</span>
-            </h4>
+              <div>
+                    <h4 onClick={event => props.toggleCompleted(event, todo.id)} key={todo.id}>
+                        {todo.task}
+                        {/* {todo.completed} */}
+                    </h4>
+                    <button onClick={event => props.deleteTask(event, todo.id)}>delete</button>
+            </div>
           ))}
 
           <form className='todo-form' onSubmit={props.addTodo}>
