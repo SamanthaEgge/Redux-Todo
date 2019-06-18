@@ -22,7 +22,7 @@ const todoReducer = (state = initialState, action) => {
         case TOGGLE_COMPLETED_TASK:
             return {
                 ...state,
-                todolist: state.todolist.filter(todo => {
+                todolist: state.todolist.map(todo => {
                     if (action.payload === todo.id) {
                         return {
                           ...todo,
