@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import TodoList from './components/TodoList'
 
 class App extends Component {
   state = {
-    todos: []
+    todo: []
   }
 
   render () {
     return (
       <div className="App">
-  
+        <h2>Todo List: </h2>
+        <TodoList />
+        <TodoForm />
       </div>
     )
   };
 }
 
-export default App;
+const mapStateToProps = (todo) => {
+  return {
+    todo: state.todo
+  }
+}
+
+export default connect(mapStateToProps, { action })(App);
